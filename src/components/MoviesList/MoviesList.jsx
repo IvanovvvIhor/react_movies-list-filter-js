@@ -2,18 +2,14 @@ import './MoviesList.scss';
 import { MovieCard } from '../MovieCard';
 
 export const MoviesList = ({ movies, query }) => {
-  let visibleMovies = [...movies];
+  const normalizedQuery = query.toLowerCase().trim();
 
-  if (query) {
-    visibleMovies = visibleMovies.filter(film => {
-      const normalizedQuery = query.toLowerCase().trim();
-
-      return (
-        film.title.toLowerCase().includes(normalizedQuery) ||
-        film.description.toLowerCase().includes(normalizedQuery)
-      );
-    });
-  }
+  const visibleMovies = movies.filter(film => {
+    return (
+      film.title.toLowerCase().includes(normalizedQuery) ||
+      film.description.toLowerCase().includes(normalizedQuery)
+    );
+  });
 
   return (
     <div className="movies">
